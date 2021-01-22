@@ -3,27 +3,31 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Wine and Dine</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 </head>
 
 <header>
-  <h1>Wine and Dine</h1>
+  <h1 class="has-text-centered has-text-weight-semibold is-size-1 has-background-primary-dark has-text-light">Wine and Dine</h1>
 </header>
 <body>
-  <section class="section">
-    <div class="container">
-      <h1 class="title">Section</h1>
-      <h2 class="subtitle">
-        A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading
-      </h2>
-    </div>
+    <div class="columns">
+      <!-- left column -->
+      <div class="column has-background-warning-light is-one-quarter mt-3">
+        <div id="food">
+          <h1>Search for a meal by main ingredient</h1>
+        </div>
+        <div id="drink">
+          <h1>Don't forget your drink!</h1>
+        </div>  
+      </div>
 
-    <div id="food"> FOOD HERE
-    </div>
-    <div id="drink"> DRINK HERE
+      <!-- right column -->
+      <div class="column">
+        content
+      </div>
     </div>
   </section>
 </body>
