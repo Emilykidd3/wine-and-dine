@@ -18,10 +18,10 @@ var displayMeals = function(data,search) {
     var mealName = meal.strMeal;
     var mealYoutubeURL = meal.strYoutube;
     var foodContentEl = document.createElement('div');
-    foodContentEl.classList = "content is-size-3";
+    foodContentEl.classList = "content mb-0";
     foodContentEl.textContent=mealName;
     var mealImgEl = document.createElement("figure");
-    mealImgEl.classList = "image is-square";
+    mealImgEl.classList = "image is-square mb";
     mealImgEl.innerHTML = `<a href="${mealYoutubeURL}"><img src="${mealImgURL}"></a>`
     foodBlockEl.appendChild(foodContentEl)
     foodBlockEl.appendChild(mealImgEl);
@@ -65,16 +65,16 @@ function testbenchMeals() {
     
     //getMeals('!random');
     getMeals('taco');
-    //getMeals('asdfawef'); <--- uncomment to get error
+    // getMeals('asdfawef');// <--- uncomment to get error
     return "Passed";
 };
 
 const foodBlockEl = document.createElement('div');
 const modalEl = document.createElement('div');
 
-foodBlockEl.className = 'column is-half';
+// foodBlockEl.className = 'column is-half';
 modalEl.className = 'modal';
 modalEl.innerHTML=`<div class="modal-background"></div><div class="modal-content"><div class="box"><p id="modal-error-message">Error</p></div></div><button class="modal-close is-large" aria-label="close"></button>`;
-columnsEl.appendChild(modalEl);
-contentEl.appendChild(foodBlockEl);
+foodDivEl.appendChild(modalEl);
+foodDivEl.appendChild(foodBlockEl);
 console.log(testbenchMeals());
