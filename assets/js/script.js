@@ -54,7 +54,7 @@ var getMeals = function(queryStr) {
 function randBetween(lower,upper) {
     return Math.floor(Math.random() * (upper - lower) + lower);
 }
-
+// ----- TEMPORARY ------
 function testbenchMeals() {
     var modalCloses = document.querySelectorAll(".modal-close");
     modalCloses.forEach(function (el) {
@@ -65,7 +65,7 @@ function testbenchMeals() {
     
     //getMeals('!random');
     getMeals('taco');
-    //getMeals('asdfawef');
+    //getMeals('asdfawef'); <--- uncomment to get error
     return "Passed";
 };
 
