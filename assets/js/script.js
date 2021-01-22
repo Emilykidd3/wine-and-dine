@@ -1,6 +1,6 @@
 const foodDivEl       = document.querySelector("#food");
-const columnsEl       = document.querySelector(".columns");
-const contentEl       = document.querySelectorAll(".column")[1];
+// const columnsEl       = document.querySelector(".columns");
+// const contentEl       = document.querySelectorAll(".column")[1];
 
 MEAL_API_URL = 'https://www.themealdb.com/api/json/v1/1/';
 MEAL_API_RANDOM  = 'https://www.themealdb.com/api/json/v1/1/random.php';
@@ -21,7 +21,7 @@ var displayMeals = function(data,search) {
     foodContentEl.classList = "content mb-0";
     foodContentEl.textContent=mealName;
     var mealImgEl = document.createElement("figure");
-    mealImgEl.classList = "image is-square mb";
+    mealImgEl.classList = "image is-square";
     mealImgEl.innerHTML = `<a href="${mealYoutubeURL}"><img src="${mealImgURL}"></a>`
     foodBlockEl.appendChild(foodContentEl)
     foodBlockEl.appendChild(mealImgEl);
