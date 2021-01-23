@@ -13,22 +13,40 @@
   <h1 class="has-text-centered has-text-weight-semibold is-size-1 has-background-primary-dark has-text-light">Wine and Dine</h1>
 </header>
 <body>
+  <main>
     <div class="columns">
       <!-- left column -->
-      <div class="column has-background-warning-light is-one-quarter mt-3">
+      <div class="column has-background-warning-light is-one-quarter mt-3 ml-2">
         <div id="food">
-          <h1>Search for a meal by main ingredient</h1>
+          <h1 class="is-size-3 has-text-centered has-text-primary-dark">Search for a meal by main ingredient</h1>
+          
+          <div class="field has-addons is-align-items-center">
+            <div class="control is-expanded">
+              <input class="input" type="text" placeholder="Main Ingredient">
+            </div>
+            <div class="control">
+              <a class="button">Search</a>
+            </div>
+          </div>
         </div>
         <div id="drink">
-          <h1>Don't forget your drink!</h1>
+          <h1 class="is-size-3 has-text-centered has-text-primary-dark">Don't forget your drink!</h1>
         </div>  
       </div>
 
       <!-- right column -->
       <div class="column">
-        content
+        <div>
+          <div id="food-result-name"></div>
+          <div id="food-result-picture"></div>
+        </div>
+        <div>
+          <div id="drink-result-name"></div>
+          <div id="drink-result-picture"></div>
+        </div>
       </div>
     </div>
-  </section>
+  </main>
+  <script src="assets/js/script.js"></script>
 </body>
 </html>
