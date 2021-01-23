@@ -1,44 +1,61 @@
-const foodDivEl       = document.querySelector("#food");
-// const columnsEl       = document.querySelector(".columns");
-// const contentEl       = document.querySelectorAll(".column")[1];
+// MEAL API ENDPOINTS 
+const MEAL_API_RANDOM  = 'https://www.themealdb.com/api/json/v1/1/random.php';
+const MEAL_API_SEARCH = 'https://www.themealdb.com/api/json/v1/1/search.php?';
 
-MEAL_API_URL = 'https://www.themealdb.com/api/json/v1/1/';
-MEAL_API_RANDOM  = 'https://www.themealdb.com/api/json/v1/1/random.php';
-MEAL_API_SEARCH = 'https://www.themealdb.com/api/json/v1/1/search.php?';
 
-var displayMeals = function(data,search) {
+
+// Main Body Elements
+const foodDivEl       = document.querySelector("#food-result");
+const columnsEl       = document.querySelector(".columns");
+
+// Display meal summary from fetch response data
+// 
+var displayMeals = function(data,searchTerm) {
     console.log(data);
     if (!data.meals) {
-        modalEl.classList.add('is-active');
+        displayModal(`Sorry, no results for '${searchTerm}'`);
         return;
     }
-    var randIndex=randBetween(0,data.meals.length);
-    let meal = data.meals[randIndex]; 
+    foodDivEl.innerHTML = ""; // Clear last meal display
+    
+    // Pick a random meal from the search results
+    let randIndex=randBetween(0,data.meals.length);
+    let meal = data.meals[randIndex];
+    console.log(meal);
+
+    // Get data from the meal
     var mealImgURL = meal.strMealThumb;
     var mealName = meal.strMeal;
     var mealYoutubeURL = meal.strYoutube;
-    var foodContentEl = document.createElement('div');
-    foodContentEl.classList = "content mb-0";
-    foodContentEl.textContent=mealName;
-    var mealImgEl = document.createElement("figure");
-    mealImgEl.classList = "image is-square";
-    mealImgEl.innerHTML = `<a href="${mealYoutubeURL}"><img src="${mealImgURL}"></a>`
-    foodBlockEl.appendChild(foodContentEl)
-    foodBlockEl.appendChild(mealImgEl);
-
+    var mealCategory = meal.strCategory;
     
+    // Create DOM elements
+    let foodBlockEl = document.createElement('div');
+    
+    foodBlockEl.className = "columns is-mobile mt-2"
+    
+    var foodContentEl = document.createElement('div');
+    foodContentEl.className = 'column is-half';
+    foodContentEl.innerHTML = `<span><a href="#0" class="subtitle">${mealCategory}</a></span><h3 class="title">${mealName}</h3>`
+    
+    var mealImgEl = document.createElement("div");
+    mealImgEl.appendChild(document.createElement('img')).src=mealImgURL;
+    foodContentEl.appendChild(mealImgEl);
+    foodBlockEl.appendChild(foodContentEl);
+    foodDivEl.appendChild(foodBlockEl);
 }
+
 var getMeals = function(queryStr) {
+    if (!queryStr) return;
     if (queryStr==='!random') {
         var api_url = MEAL_API_RANDOM;
     } else {
         var api_url = `${MEAL_API_SEARCH}s=${queryStr}`;
     }
-    foodBlockEl.innerHTML = '';
-    fetch(api_url).then(function(response) {
+    fetch(api_url)
+    .then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-            
             displayMeals(data,queryStr);
           });
           } else {
@@ -46,35 +63,51 @@ var getMeals = function(queryStr) {
           }
         })
         .catch(function(error) {
-            modalEl.classList.add('is-active');
-            return;
-        })
+            displayModal('Network Error: Could not contact TheMealDB.com')
+            // return;
+    })
 };
+
+
+
+
 // Utility Functions
 function randBetween(lower,upper) {
     return Math.floor(Math.random() * (upper - lower) + lower);
 }
-// ----- TEMPORARY ------
-function testbenchMeals() {
-    var modalCloses = document.querySelectorAll(".modal-close");
+
+
+// ------ Modals -------
+// Creates a 'pop-up' message to display error message
+// 
+const modalEl = document.createElement('div'); 
+modalEl.className = 'modal';
+modalEl.innerHTML=`<div class="modal-background"></div><div class="modal-content"><div class="box"><p id="modal-error-message"></p></div></div><button class="modal-close is-large" aria-label="close"></button>`;
+columnsEl.prepend(modalEl);
+
+// Display an (error) message to the user
+var displayModal = function(message){
+    modalErrorMessageEl = document.getElementById('modal-error-message');
+    modalErrorMessageEl.textContent = message;
+    modalEl.classList.add('is-active'); // Activates the overlay
+    addModalEventListeners();
+}
+// Event listener to close the modal window
+function addModalEventListeners () {
+    const modalCloses = document.querySelectorAll(".modal-close");
     modalCloses.forEach(function (el) {
-        el.addEventListener('click', function() {
-            modalEl.classList.remove('is-active');
-        })
-    });
-    
-    //getMeals('!random');
-    getMeals('taco');
-    // getMeals('asdfawef');// <--- uncomment to get error
-    return "Passed";
+        el.addEventListener('click', function _listener() {
+            modalEl.classList.remove('is-active'); // Removes the overlay
+            el.removeEventListener("click", _listener, true);
+        }, true);
+        });
 };
 
-const foodBlockEl = document.createElement('div');
-const modalEl = document.createElement('div');
+// ----- TEMPORARY ------
+function testbenchMeals() {
+    //getMeals('taco');
+    getMeals('!random');
+    // getMeals('asdfawef');// <--- uncomment to get error -Patrick
+};
 
-// foodBlockEl.className = 'column is-half';
-modalEl.className = 'modal';
-modalEl.innerHTML=`<div class="modal-background"></div><div class="modal-content"><div class="box"><p id="modal-error-message">Error</p></div></div><button class="modal-close is-large" aria-label="close"></button>`;
-foodDivEl.appendChild(modalEl);
-foodDivEl.appendChild(foodBlockEl);
-console.log(testbenchMeals());
+testbenchMeals(); // For testing - Patrick
