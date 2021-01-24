@@ -17,6 +17,7 @@ var displayMeal = function(data,searchTerm) {
     console.log(data);
     if (!data.meals) {
         displayModal(`Sorry, no results for '${searchTerm}'`);
+        return;
     }
     foodDivEl.innerHTML = ""; // Clear last meal display
     
@@ -61,14 +62,15 @@ var getMeals = function(searchText) {
     .then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-                displayMeals(data,searchText);
+                displayMeal(data,searchText);
             });
         } else {
             console.error("Error: "+response.statusText);
         }
     })
     .catch(function(error) {
-        displayModal('Network Error: Could not contact TheMealDB.com')
+        displayModal('Network Error: Could not contact TheMealDB.com');
+        return;
     });
 };
 // ------ Form Handler ----------
@@ -79,9 +81,11 @@ var mealFormHandler = function(event) {
     let searchText = mealSearchText.value.trim();
     if (!searchText) {
         displayModal('Please enter a search keyword!');
-    }
+        return ;
+    } else {
     getMeals(searchText);
     mealSearchText.value = "";
+    }
 }
 
 foodInputEl.addEventListener("submit",mealFormHandler);
