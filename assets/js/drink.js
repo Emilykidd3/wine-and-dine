@@ -1,4 +1,4 @@
-//** Drink JS Cocktail DB */
+//** Drink JS Cocktail */
 
 const baseURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i="
 const baseURLByID = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="
