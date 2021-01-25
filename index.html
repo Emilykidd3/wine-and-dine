@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Wine and Dine</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <script defer src="drink.js" type="text/javascript"></script>
 </head>
 
 <header>
@@ -31,29 +32,26 @@
         </div>
         <div id="drink">
           <h1 class="is-size-3 has-text-centered has-text-primary-dark pt-6">Don't forget your drink!</h1>
+          <h2 id="subheading">Search By Spirit</h2>
         </div>
-        <div class="field is-grouped is-grouped-centered pt-4">
-          <p class="control">
-            <a class="button">Non-Alcoholic</a>
-          </p>
-          <p class="control">
-            <a class="button">Vodka</a>
-          </p>
-        </div>
-        <div class="field is-grouped is-grouped-centered">
-          <p class="control">
-            <a class="button">Gin</a>
-          </p>
-          <p class="control">
-            <a class="button">Rum</a>
-          </p>
-        </div>
-        <div class="field is-grouped is-grouped-centered">
-          <p class="control">
-            <a class="button">Whiskey</a>
-          </p>
-          <p class="control">
-            <a class="button">Tequila</a>
+        <div class="wrapper">
+          <form>
+            <p>
+              <select autofocus id="textInput">
+                <option value="Click to select">Click to select</option>
+                <option value="Gin">Gin</option>
+                <option value="Tequila">Tequila</option>
+                <option value="Rum">Rum</option>
+                <option value="Vodka">Vodka</option>
+                <option value="Brandy">Brandy</option>
+              </select>
+            </p>
+            <button id="submitButton">Find me a cocktail!</button>
+          </form>
+          <div class="displayCocktail">
+          </div>
+          <div class="ingredients">
+          </div>        
           </p>
         </div>
       </div>
