@@ -81,6 +81,7 @@ var mealFormHandler = function(event) {
     let searchText = mealSearchText.value.trim();
     if (!searchText) {
         displayModal('Please enter a search keyword!');
+        return;
     } else {
         getMeals(searchText);
     }
@@ -94,7 +95,7 @@ foodInputEl.addEventListener("submit", mealFormHandler);
 
 const rootEl         = document.documentElement; 
 const modalEl        = document.createElement('div');
-const modalCloses = document.querySelectorAll(".modal-close");
+const modalCloses    = document.querySelectorAll(".modal-close");
 
 modalEl.className = 'modal';
 modalEl.setAttribute('role','dialog');
@@ -108,7 +109,7 @@ var displayModal = function(message) {
     modalErrorMessageEl.textContent = message;
     rootEl.classList.add('is-clipped');
     modalEl.classList.add('is-active'); // Activates the overlay
-    
+
     document.addEventListener('keydown', function _listener(event) {
         console.log(event);
         var e = event || window.event;
@@ -134,7 +135,6 @@ var closeModals = function(event) {
 // Event listener to close the modal window 
 document.querySelector('.modal-close').addEventListener('click', closeModals);
 
-
 // Utility Functions
 function randBetween(lower,upper) {
     return Math.floor(Math.random() * (upper - lower) + lower);
@@ -149,4 +149,4 @@ function testbenchMeals() {
     // getMeals('asdfawef');// <--- uncomment to get error -Patrick
 };
 
-// testbenchMeals(); // For testing - Patrick
+testbenchMeals(); // For testing - Patrick

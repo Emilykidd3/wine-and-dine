@@ -10,7 +10,11 @@
 </head>
 
 <header>
-  <h1 class="has-text-centered has-text-weight-semibold is-size-1 has-background-primary-dark has-text-light">Wine and Dine</h1>
+  <navbar class="navbar-stretch">
+    <div class="py-3 has-background-primary-dark">
+      <h1 class="has-text-centered has-text-weight-semibold is-size-1 has-text-light">Wine and Dine</h1>
+    </div>
+  </navbar>
 </header>
 <body>
   <main>
@@ -18,18 +22,17 @@
       <!-- left column -->
       <div class="column has-background-white-ter is-one-quarter mt-3 ml-2">
         <div id="food">
-          <form id="meal-search-form">
           <h1 class="is-size-3 has-text-centered has-text-primary-dark">Search for a meal by main ingredient</h1>
-          
+          <form name="meal-search-form" id="meal-search-form">
           <div class="field has-addons is-align-items-center pt-4">
             <div class="control is-expanded">
-              <input id="meal-search-text" class="input" type="text" placeholder="Main Ingredient">
+              <input id="meal-search-text" class="input" type="text" placeholder="Main Ingredient" required>
             </div>
             <div class="control">
               <button id="meal-search-button" class="button">Search</button>
             </div>
           </div>
-        </form>
+          </form>
         </div>
         <div id="drink">
           <h1 class="is-size-3 has-text-centered has-text-primary-dark pt-6">Don't forget your drink!</h1>
