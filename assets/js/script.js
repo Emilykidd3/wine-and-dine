@@ -81,57 +81,58 @@ var mealFormHandler = function(event) {
     let searchText = mealSearchText.value.trim();
     if (!searchText) {
         displayModal('Please enter a search keyword!');
-        return ;
     } else {
-    getMeals(searchText);
-    mealSearchText.value = "";
+        getMeals(searchText);
     }
 }
 
-foodInputEl.addEventListener("submit",mealFormHandler);
+foodInputEl.addEventListener("submit", mealFormHandler);
 
 // ------ Modals -------
 // Creates a 'pop-up' message to display error message
 // 
+
 const rootEl         = document.documentElement; 
 const modalEl        = document.createElement('div');
+const modalCloses = document.querySelectorAll(".modal-close");
+
 modalEl.className = 'modal';
+modalEl.setAttribute('role','dialog');
 modalEl.innerHTML=`<div class="modal-background"></div><div class="modal-content"><div class="box"><p id="modal-error-message"></p></div></div><button class="modal-close is-large" aria-label="close"></button>`;
 columnsEl.insertBefore(modalEl,columnsEl.firstChild);
 
 // Display an (error) message to the user
+// Event listener to close the modal window on ESC key
 var displayModal = function(message) {
     let modalErrorMessageEl = document.getElementById('modal-error-message');
     modalErrorMessageEl.textContent = message;
     rootEl.classList.add('is-clipped');
     modalEl.classList.add('is-active'); // Activates the overlay
+    
+    document.addEventListener('keydown', function _listener(event) {
+        console.log(event);
+        var e = event || window.event;
+        if (e.keyCode === 27) {
+            document.querySelector('.modal-close').click();
+            document.removeEventListener('keydown',_listener,true);
+        }
+        e.preventDefault();
+        e.stopPropagation();
+    },  true);
+    
 };
-
-function closeModals() {
+// Close the modal window
+var closeModals = function(event) {
     let modals = document.querySelectorAll('.modal')
     rootEl.classList.remove('is-clipped');
     modals.forEach(function(elMod) {
         elMod.classList.remove('is-active'); // Removes the overlay
-    })
+    });
+    
 };
 
-const modalCloses = document.querySelectorAll(".modal-close");
-
 // Event listener to close the modal window 
-modalCloses.forEach(function (el) {
-    el.addEventListener('click', function _listener() {
-        closeModals();
-    }, false);
-});
-// Event listener to close the modal window on SEC key
-document.addEventListener('keydown', function (event) {
-    var e = event || window.event;
-    if (e.keyCode === 27) {
-      closeModals();
-    }
-});
-
-
+document.querySelector('.modal-close').addEventListener('click', closeModals);
 
 
 // Utility Functions
