@@ -103,38 +103,37 @@ modalEl.setAttribute('role','dialog');
 modalEl.innerHTML=`<div class="modal-background"></div><div class="modal-content"><div class="box"><p id="modal-error-message"></p></div></div><button class="modal-close is-large" aria-label="close"></button>`;
 columnsEl.insertBefore(modalEl,columnsEl.firstChild);
 
+function handleKeypress(e) {
+    if (e.keyCode === 27) {
+        closeModals();
+    }
+    e.preventDefault();
+}
 // Display an (error) message to the user
 // Event listener to close the modal window on ESC key
-var displayModal = function(message) {
+function displayModal(message) {
     let modalErrorMessageEl = document.getElementById('modal-error-message');
     modalErrorMessageEl.textContent = message;
     rootEl.classList.add('is-clipped');
     modalEl.classList.add('is-active'); // Activates the overlay
+    document.addEventListener('keydown', handleKeypress);
+    }
 
-    document.addEventListener('keydown', function _listener(event) {
-        console.log(event);
-        var e = event || window.event;
-        if (e.keyCode === 27) {
-            document.querySelector('.modal-close').click();
-            document.removeEventListener('keydown',_listener,true);
-        }
-        e.preventDefault();
-        e.stopPropagation();
-    },  true);
-    
-};
 // Close the modal window
-var closeModals = function(event) {
+function closeModals(){
     let modals = document.querySelectorAll('.modal')
     rootEl.classList.remove('is-clipped');
     modals.forEach(function(elMod) {
         elMod.classList.remove('is-active'); // Removes the overlay
     });
-    
+    document.removeEventListener('keydown',handleKeypress);
+
 };
 
 // Event listener to close the modal window 
-document.querySelector('.modal-close').addEventListener('click', closeModals);
+document.querySelector('.modal-close').addEventListener('click', function (event) {
+    closeModals();
+})
 
 // Utility Functions
 function randBetween(lower,upper) {
