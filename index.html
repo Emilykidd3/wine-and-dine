@@ -18,7 +18,6 @@
       <!-- left column -->
       <div class="column has-background-white-ter is-one-quarter mt-3 ml-2">
         <div id="food">
-          <form id="meal-search-form">
           <h1 class="is-size-3 has-text-centered has-text-primary-dark">Search for a meal by main ingredient</h1>
           
           <div class="field has-addons is-align-items-center pt-4">
@@ -29,7 +28,6 @@
               <button id="meal-search-button" class="button">Search</button>
             </div>
           </div>
-        </form>
         </div>
         <div id="drink">
           <h1 class="is-size-3 has-text-centered has-text-primary-dark pt-6">Don't forget your drink!</h1>
@@ -62,15 +60,17 @@
 
       <!-- right column -->
       <div class="column">
-        <div id="food-result">
-          <h1 class="is-size-3">Your Meal</h1>
-          <div id="food-result-name"></div>
-          <div id="food-result-picture"></div>
-        </div>
-        <div id="drink-result">
-          <h1 class="is-size-3">Your Drink</h1>
-          <div id="drink-result-name"></div>
-          <div id="drink-result-picture"></div>
+          <div class="columns">
+          <div id="food-result" class="column is-half">
+            <h1 class="is-size-3">Your Meal</h1>
+            <div id="food-result-name"></div>
+            <div id="food-result-picture"></div>
+          </div>
+          <div id="drink-result" class="column is-half">
+            <h1 class="is-size-3">Your Drink</h1>
+            <div id="drink-result-name" class="displayCocktail"></div>
+            <div id="drink-result-picture" class="ingredients"></div>
+          </div>
         </div>
       </div>
     </div>
