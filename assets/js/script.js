@@ -2,6 +2,7 @@
 const MEAL_API_RANDOM  = 'https://www.themealdb.com/api/json/v1/1/random.php';
 const MEAL_API_SEARCH = 'https://www.themealdb.com/api/json/v1/1/search.php?';
 
+
 // Input / Form Elements
 const mealSearchBtn   = document.querySelector("#meal-search-button")
 const mealSearchText =  document.querySelector("#meal-search-text");
@@ -150,3 +151,82 @@ function testbenchMeals() {
 };
 
 testbenchMeals(); // For testing - Patrick
+
+//DRINKS SCRIPTS
+const DRINK_API_RANDOM = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+const DRINK_API_SEARCH = 'https://www.thecocktaildb.com/api/json/v1/1/search.php';
+const DRINK_API_NONALC = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic';
+
+// Main Body Elements
+const drinkDivEl = document.querySelector("#drink-result");
+
+var getDrinks = function(queryStr){
+	if (!queryStr) return;
+    if (queryStr==='!random') {
+        var api_url = DRINK_API_RANDOM;
+    }else if(queryStr=='Non_Alcoholic'){
+		var api_url = DRINK_API_NONALC;
+	} else {
+        var api_url = `${DRINK_API_SEARCH}?s=${queryStr}`;
+    }
+    fetch(api_url)
+    .then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+            displayDrinks(data,queryStr);
+          });
+          } else {
+            console.error("Error: "+response.statusText);
+          }
+        })
+        .catch(function(error) {
+            displayModal('Network Error: Could not contact TheCocktailDB.com')
+            // return;
+    })
+}
+
+var displayDrinks = function(data,searchTerm) {
+    console.log(data);
+    if (!data.drinks) {
+        displayModal(`Sorry, no results for '${searchTerm}'`);
+        return;
+    }
+    drinkDivEl.innerHTML = ""; // Clear last drink display
+	
+	// Pick a random drink from the search results
+    let randIndex=randBetween(0,data.drinks.length);
+    let drink = data.drinks[randIndex];
+    console.log(drink);
+	
+	
+    // Get drink data
+    var drinkImgURL = drink.strDrinkThumb;
+    var drinkName = drink.strDrink;
+    var drinkTags = drink.strTags;
+    var drinkCategory = drink.strCategory;
+    if (searchTerm=='Non_Alcoholic'){
+        drinkCategory= "Non-Alcoholic";
+    }
+    
+    // Create DOM elements
+    let drinkBlockEl = document.createElement('div');
+    
+    drinkBlockEl.className = "columns is-mobile mt-2"
+    
+    var drinkContentEl = document.createElement('div');
+    drinkContentEl.className = 'column is-half';
+    drinkContentEl.innerHTML = `<span><a href="#0" class="subtitle">${drinkCategory}</a></span><h3 class="title">${drinkName}</h3>`
+    
+    var drinkImgEl = document.createElement("div");
+    drinkImgEl.appendChild(document.createElement('img')).src=drinkImgURL;
+    drinkContentEl.appendChild(drinkImgEl);
+    drinkBlockEl.appendChild(drinkContentEl);
+    drinkDivEl.appendChild(drinkBlockEl);
+}
+
+// ----- Initial drink ------
+function testbenchDrinks() {
+    getDrinks('!random');
+};
+
+testbenchDrinks();
