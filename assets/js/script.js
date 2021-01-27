@@ -3,6 +3,10 @@ const MEAL_API_RANDOM  = 'https://www.themealdb.com/api/json/v1/1/random.php';
 const MEAL_API_SEARCH = 'https://www.themealdb.com/api/json/v1/1/search.php?';
 
 
+// Input / Form Elements
+const mealSearchBtn   = document.querySelector("#meal-search-button")
+const mealSearchText =  document.querySelector("#meal-search-text");
+
 // Main Body Elements
 const foodInputEl     = document.querySelector("#meal-search-form");
 const foodDivEl       = document.querySelector("#food-result");
