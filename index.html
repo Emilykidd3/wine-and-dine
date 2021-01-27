@@ -19,8 +19,7 @@
       <div class="column has-background-white-ter is-one-quarter mt-3 ml-2">
         <div id="food">
           <form id="meal-search-form">
-            <h1 class="is-size-3 has-text-centered has-text-primary-dark">Search for a meal by main ingredient</h1>
-            
+            <h1 class="is-size-3 has-text-centered has-text-primary-dark">Search for a meal by main ingredient</h1> 
             <div class="field has-addons is-align-items-center pt-4">
               <div class="control is-expanded">
                 <input id="meal-search-text" class="input" type="text" placeholder="Main Ingredient">
@@ -36,26 +35,26 @@
         </div>
         <div class="field is-grouped is-grouped-centered pt-4">
           <p class="control">
-            <a class="button">Non-Alcoholic</a>
+            <a class="button" onclick="getDrinks('Non_Alcoholic')">Non-Alcoholic</a>
           </p>
           <p class="control">
-            <a class="button">Vodka</a>
-          </p>
-        </div>
-        <div class="field is-grouped is-grouped-centered">
-          <p class="control">
-            <a class="button">Gin</a>
-          </p>
-          <p class="control">
-            <a class="button">Rum</a>
+            <a class="button" onclick="getDrinks('Vodka')">Vodka</a>
           </p>
         </div>
         <div class="field is-grouped is-grouped-centered">
           <p class="control">
-            <a class="button">Whiskey</a>
+            <a class="button" onclick="getDrinks('Gin')">Gin</a>
           </p>
           <p class="control">
-            <a class="button">Tequila</a>
+            <a class="button" onclick="getDrinks('Rum')">Rum</a>
+          </p>
+        </div>
+        <div class="field is-grouped is-grouped-centered">
+          <p class="control">
+            <a class="button" onclick="getDrinks('Whiskey')">Whiskey</a>
+          </p>
+          <p class="control">
+            <a class="button" onclick="getDrinks('Tequila')">Tequila</a>
           </p>
         </div>
       </div>
