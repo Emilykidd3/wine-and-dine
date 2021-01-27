@@ -35,10 +35,10 @@ var displayMeal = function(data,searchTerm) {
     
     // Create DOM elements
     let foodBlockEl = document.createElement('div');
-    foodBlockEl.className = "columns is-mobile mt-3"
+    foodBlockEl.className = "block"
 
     var foodContentEl = document.createElement('div');
-    foodContentEl.className = 'column is-half';
+    foodContentEl.className = 'box';
     foodContentEl.innerHTML = `<span><a href="#0" class="subtitle">${mealCategory}</a></span><h3 class="title">${mealName}</h3>`
     foodBlockEl.appendChild(foodContentEl);
 
@@ -211,10 +211,10 @@ var displayDrinks = function(data,searchTerm) {
     // Create DOM elements
     let drinkBlockEl = document.createElement('div');
     
-    drinkBlockEl.className = "columns is-mobile mt-2"
+    drinkBlockEl.className = "block"
     
     var drinkContentEl = document.createElement('div');
-    drinkContentEl.className = 'column is-half';
+    drinkContentEl.className = "box";
     drinkContentEl.innerHTML = `<span><a href="#0" class="subtitle">${drinkCategory}</a></span><h3 class="title">${drinkName}</h3>`
     
     var drinkImgEl = document.createElement("div");
