@@ -7,7 +7,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Wine and Dine</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-  <script defer src="drink.js" type="text/javascript"></script>
 </head>
 
 <header>
@@ -26,32 +25,35 @@
               <input id="meal-search-text" class="input" type="text" placeholder="Main Ingredient">
             </div>
             <div class="control">
-              <button id="meal-search-button" class="button">Search</button>
+              <button id="meal-search-button" class="button" onclick="getMeals(document.getElementById('meal-search-text').value)">Search</button>
             </div>
           </div>
         </div>
         <div id="drink">
           <h1 class="is-size-3 has-text-centered has-text-primary-dark pt-6">Don't forget your drink!</h1>
-          <h2 id="subheading">Search By Spirit</h2>
         </div>
-        <div class="wrapper">
-          <form>
-            <p>
-              <select autofocus id="textInput">
-                <option value="Click to select">Click to select</option>
-                <option value="Gin">Gin</option>
-                <option value="Tequila">Tequila</option>
-                <option value="Rum">Rum</option>
-                <option value="Vodka">Vodka</option>
-                <option value="Brandy">Brandy</option>
-              </select>
-            </p>
-            <button id="submitButton">Find me a cocktail!</button>
-          </form>
-          <div class="displayCocktail">
-          </div>
-          <div class="ingredients">
-          </div>        
+        <div class="field is-grouped is-grouped-centered pt-4">
+          <p class="control">
+            <a class="button" onclick="getDrinks('Non_Alcoholic')">Non-Alcoholic</a>
+          </p>
+          <p class="control">
+            <a class="button" onclick="getDrinks('Vodka')">Vodka</a>
+          </p>
+        </div>
+        <div class="field is-grouped is-grouped-centered">
+          <p class="control">
+            <a class="button" onclick="getDrinks('Gin')">Gin</a>
+          </p>
+          <p class="control">
+            <a class="button" onclick="getDrinks('Rum')">Rum</a>
+          </p>
+        </div>
+        <div class="field is-grouped is-grouped-centered">
+          <p class="control">
+            <a class="button" onclick="getDrinks('Whiskey')">Whiskey</a>
+          </p>
+          <p class="control">
+            <a class="button" onclick="getDrinks('Tequila')">Tequila</a>
           </p>
         </div>
       </div>
