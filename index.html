@@ -7,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Wine and Dine</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/v4-shims.min.css" integrity="sha512-NfhLGuxy6G12XHj7/bvm0RC3jmR25RdpImn8P19aIMmN5pndO0fvIg78ihN2WIJtVRs+AYVrnYF4AipVikGPLg==" crossorigin="anonymous" /> -->
 </head>
 
 <header>
@@ -18,6 +20,7 @@
 </header>
 <body>
   <main>
+    <div class="container">
     <div class="columns">
       <!-- left column -->
       <div class="column has-background-white-ter is-one-quarter mt-3 ml-2">
@@ -26,7 +29,7 @@
             <h1 class="is-size-3 has-text-centered has-text-primary-dark">Search for a meal by main ingredient</h1> 
             <div class="field has-addons is-align-items-center pt-4">
               <div class="control is-expanded">
-                <input id="meal-search-text" class="input" type="text" placeholder="Main Ingredient">
+                <input id="meal-search-text" class="input" type="text" placeholder="Main Ingredient" required>
               </div>
               <div class="control">
                 <button id="meal-search-button" class="button">Search</button>
@@ -78,6 +81,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </main>
   <script type="text/javascript" src="./assets/js/script.js"></script>

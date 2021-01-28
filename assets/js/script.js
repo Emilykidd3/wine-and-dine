@@ -14,8 +14,37 @@ const columnsEl       = document.querySelector(".columns");
 
 // Display meal summary from fetch response data
 // 
+var storeMeal = function(target) {
+    let idMeal = target.value;
+    localStorage.setItem('favorite-meal', idMeal);
+    let favMealBtn = document.querySelector('.btn-favorite');
+    favMealBtn.classList.add('is-primary');
+}
+
+var recallFavorites = function(event) {
+    console.log(event);
+    if (!localStorage.getItem('favorite-meal')) {
+        getMeals('!random');
+        return ;
+    } else {
+        getMealByID(localStorage.getItem('favorite-meal'));
+    }
+};
+
+var favoriteHandler = function(event) {
+    console.log(event.currentTarget);
+    console.log(event.currentTarget.value);
+    if (localStorage.getItem('favorite-meal') === event.currentTarget.value) {
+        console.log("Remove Favorite")
+        event.currentTarget.classList.remove('is-primary');
+        localStorage.removeItem('favorite-meal');
+        // localStorage.getItem
+    } else {
+        storeMeal(event.currentTarget)
+    }
+}
 var displayMeal = function(data,searchTerm) {
-    console.log(data);
+    // console.log(data);
     if (!data.meals) {
         displayModal(`Sorry, no results for '${searchTerm}'`);
         return;
@@ -28,6 +57,7 @@ var displayMeal = function(data,searchTerm) {
     console.log(meal);
 
     // Get data from the meal
+    var idMeal = meal.idMeal;
     var mealImgURL = meal.strMealThumb;
     var mealName = meal.strMeal;
     var mealYoutubeURL = meal.strYoutube;
@@ -35,23 +65,62 @@ var displayMeal = function(data,searchTerm) {
     
     // Create DOM elements
     let foodBlockEl = document.createElement('div');
-    foodBlockEl.className = "block"
+    foodBlockEl.className = "block";
+    foodDivEl.appendChild(foodBlockEl);
 
     var foodContentEl = document.createElement('div');
     foodContentEl.className = 'box';
     foodContentEl.innerHTML = `<span><a href="#0" class="subtitle">${mealCategory}</a></span><h3 class="title">${mealName}</h3>`
-    foodBlockEl.appendChild(foodContentEl);
 
+    foodBlockEl.appendChild(foodContentEl);
+    let favoriteBtn = document.createElement('button');
+    
+    favoriteBtn.value = idMeal;
+    favoriteBtn.setAttribute('data-favorite', idMeal);
+    favoriteBtn.name = "meal-favorite";
+    favoriteBtn.textContent = "";
+    favoriteBtn.type = "button";
+    favoriteBtn.className = "button btn-favorite";
+    
+    favoriteBtn.addEventListener('click',favoriteHandler);
+
+    let favoriteIcon = document.createElement('span')
+    favoriteIcon.className = "icon"
+
+    favoriteIcon.appendChild(document.createElement('i')).className="far fa-bookmark";
+    favoriteBtn.appendChild(favoriteIcon);
+    
+
+    //innerHTML= `<i class="far fa-bookmark"></i>`
+    if (idMeal === localStorage.getItem('favorite-meal')) {
+        favoriteBtn.classList.add('is-primary')
+    }
     var mealYoutubeEl = document.createElement("a");
     mealYoutubeEl.href=mealYoutubeURL;
     foodContentEl.appendChild(mealYoutubeEl);
 
     var mealImgEl = document.createElement("div");
     mealImgEl.appendChild(document.createElement('img')).src=mealImgURL;
+    foodContentEl.appendChild(favoriteBtn);
     mealYoutubeEl.appendChild(mealImgEl);
-    
-    foodDivEl.appendChild(foodBlockEl);
+
 }
+var getMealByID = function(id) {
+    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
+    .then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+                displayMeal(data);
+            });
+        } else {
+            console.error("Error: "+response.statusText);
+        }
+    })
+    .catch(function(error) {
+        displayModal('Network Error: Could not contact TheMealDB.com');
+        return;
+    });
+};
 
 var getMeals = function(searchText) {
     if (searchText==='!random') {
@@ -149,8 +218,8 @@ function testbenchMeals() {
     // getMeals('asdfawef');// <--- uncomment to get error -Patrick
 };
 
-testbenchMeals(); // For testing - Patrick
-
+// testbenchMeals(); // For testing - Patrick
+window.addEventListener('DOMContentLoaded', recallFavorites)
 //DRINKS SCRIPTS
 const DRINK_API_RANDOM = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
 const DRINK_API_SEARCH = 'https://www.thecocktaildb.com/api/json/v1/1/search.php';
