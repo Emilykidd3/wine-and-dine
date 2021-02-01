@@ -22,7 +22,6 @@ var storeMeal = function(target) {
 }
 
 var recallFavorites = function(event) {
-    console.log(event);
     if (!localStorage.getItem('favorite-meal')) {
         getMeals('!random');
         return ;
@@ -32,19 +31,14 @@ var recallFavorites = function(event) {
 };
 
 var favoriteHandler = function(event) {
-    console.log(event.currentTarget);
-    console.log(event.currentTarget.value);
     if (localStorage.getItem('favorite-meal') === event.currentTarget.value) {
-        console.log("Remove Favorite")
         event.currentTarget.classList.remove('is-primary');
         localStorage.removeItem('favorite-meal');
-        // localStorage.getItem
     } else {
         storeMeal(event.currentTarget)
     }
 }
 var displayMeal = function(data,searchTerm) {
-    // console.log(data);
     if (!data.meals) {
         displayModal(`Sorry, no results for '${searchTerm}'`);
         return;
@@ -54,7 +48,6 @@ var displayMeal = function(data,searchTerm) {
     // Pick a random meal from the search results
     let randIndex=randBetween(0,data.meals.length);
     let meal = data.meals[randIndex];
-    console.log(meal);
 
     // Get data from the meal
     var idMeal = meal.idMeal;
@@ -90,8 +83,6 @@ var displayMeal = function(data,searchTerm) {
     favoriteIcon.appendChild(document.createElement('i')).className="far fa-bookmark";
     favoriteBtn.appendChild(favoriteIcon);
     
-
-    //innerHTML= `<i class="far fa-bookmark"></i>`
     if (idMeal === localStorage.getItem('favorite-meal')) {
         favoriteBtn.classList.add('is-primary')
     }
@@ -211,7 +202,6 @@ function randBetween(lower,upper) {
 
 // addModalEventListeners();
 
-// ----- TEMPORARY ------
 function testbenchMeals() {
     //getMeals('taco');
     getMeals('!random');
@@ -254,7 +244,6 @@ var getDrinks = function(queryStr){
 }
 
 var displayDrinks = function(data,searchTerm) {
-    console.log(data);
     if (!data.drinks) {
         displayModal(`Sorry, no results for '${searchTerm}'`);
         return;
@@ -264,8 +253,6 @@ var displayDrinks = function(data,searchTerm) {
 	// Pick a random drink from the search results
     let randIndex=randBetween(0,data.drinks.length);
     let drink = data.drinks[randIndex];
-    console.log(drink);
-	
 	
     // Get drink data
     var drinkImgURL = drink.strDrinkThumb;
